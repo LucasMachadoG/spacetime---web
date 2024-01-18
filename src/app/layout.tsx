@@ -1,6 +1,11 @@
 import type { Metadata } from 'next'
 import { Roboto_Flex as Roboto, Bai_Jamjuree as BaiJamjure } from 'next/font/google'
 import './globals.css'
+import { cookies } from 'next/headers'
+import Profile from '@/components/Profile'
+import Signin from '@/components/Signin'
+import Hero from '@/components/Hero'
+import { Link } from 'lucide-react'
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-roboto'})
 const baijamjure = BaiJamjure({ subsets: ['latin'], weight: '700', variable: '--font-baijamjure' })
@@ -15,9 +20,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const isAutheticated = cookies().has('token')
+
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${baijamjure.variable} font-sans text-gray-100 bg-gray-900`}>{children}</body>
+      <body className={`${roboto.variable} ${baijamjure.variable} font-sans text-gray-100 bg-gray-900`}>
+        <div className='grid grid-cols-2 min-h-screen'>
+      <div className='flex flex-col items-start justify-between px-28 py-16 relative overflow-hidden border-r border-white/10'>
+        <div className='absolute right-0 top-1/2 h-[288px] w-[526px] -translate-y-1/2 translate-x-1/2 rounded-full bg-purple-700 opacity-50 blur-[220px]' />
+        <div className="absolute right-2 top-0 bottom-0 w-2 bg-stripes" />
+
+        {isAutheticated ? <Profile /> : <Signin />}
+        <Hero />
+
+        <div className="text-sm leading-relaxed text-gray-200">
+          Feito com 💜 no NLW da <Link href={""} className="underline hover:text-gray-100" target="_blank">Rocketseat</Link>
+        </div>
+      </div>
+      
+      {children}
+      
+    </div>
+      </body>
     </html>
   )
 }

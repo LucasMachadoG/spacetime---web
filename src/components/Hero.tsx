@@ -1,0 +1,19 @@
+import Link from 'next/link'
+import nlwLogo from '../assets/nlw-spacetime-logo.svg'
+import Image from 'next/image'
+
+export default function Hero(){
+  return(
+    <div className="space-y-5">
+    <Image src={nlwLogo} alt="NLW Spacetime" />
+    <div className="max-w[420px] space-y-4">
+      <h1 className="mt-5 text-5xl font-bold leading-tight text-gray-50">Sua cápsula do tempo</h1>
+      <p className="mt-1 text-lg leading-relaxed">Colecione momentos marcantes da sua jornada e compartilhe (se quiser) com o mundo!</p>
+    </div>
+
+    <Link href={"/memories/new"} className="inline-block rounded-full bg-green-500 px-5 py-5 font-alt text-sm uppercase leading-none text-black hover:bg-green-600 transition-colors">
+      CADASTRAR LEMBRANÇA
+    </Link>
+  </div>
+  )
+}
